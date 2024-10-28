@@ -10,6 +10,9 @@
 #src/environments/*
 
 # Node
+src/styles.css
+src/styles-mobile.css
+src/styles-tablette.css
 /node_modules
 npm-debug.log
 yarn-error.log

@@ -52,6 +52,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles-min.css",
               "src/styles.css",
               "src/styles-tablette.css",
               "src/styles-mobile.css"
