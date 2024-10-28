@@ -19,9 +19,15 @@
     <button type="submit" [disabled]="contactForm.invalid">Valider</button>
 
   </form>
-  <p *ngIf="messageSent">Message envoyé</p>
-  
+ 
 
+  <p *ngIf="messageSent">Message envoyé</p>
+  <br>
+  <a class="mentionLien" href="assets/cv.pdf" download="MelCyDev_CV.pdf">Télécharger mon CV</a>
+  <br><br>
+  <a class="mentionLien" href="https://fr.linkedin.com/in/cyril-melin-61b77a151" target="_blank">
+    <i class="fab fa-linkedin"></i>
+  </a>
   <div *ngIf="myMention">
     <h3>Mentions Légales</h3>
     <p class="mentionP"><strong>Nom de l'entreprise :</strong> {{monEntreprise}}</p>
@@ -46,7 +52,7 @@
   <p class="orange">© Copyright 2024 - {{monEntreprise}}. Tous droits réservés.</p>
         
         <!--
-  <i class="fab fa-linkedin"></i>
+  
         <i class="fab fa-twitter"></i>
         <i class="fab fa-instagram"></i>
        

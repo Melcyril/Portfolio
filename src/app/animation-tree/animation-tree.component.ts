@@ -48,7 +48,7 @@ export class AnimationTreeComponent {
     this.animationContainer.nativeElement.appendChild(this.renderer.domElement);
 
 
-    this.scene.add(new THREE.AxesHelper())
+    //this.scene.add(new THREE.AxesHelper())
     this.camera.position.z=3;
     this.camera.position.y=0.5;
     this.camera.position.x=0.5;

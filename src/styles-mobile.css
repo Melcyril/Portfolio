@@ -151,11 +151,38 @@
       }
 
   }
+
+  @media screen and (max-width: 390px){
+    .introCarac{
+        font-size: 2rem;
+    }
+    .about{
+        font-size: smaller;
+       
+    }
+    .navigationDiv{
+        position: absolute;
+        margin-top: 70vh;
+    }
+    .espace{
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+    .switch{
+        margin-left: 43%;
+        margin-top: 97vh;
+        z-index: 66;
+    }
+    h3{
+        font-size: 1rem;
+    }
+  }
   @media screen and (max-height: 500px) and (max-width: 1000px) {
     /* Ajoutez ici vos styles spécifiques pour le mode paysage */
     body{
         font-size: small;
     }
+
     ul{
         font-size: 0.5rem;
     }
@@ -222,28 +249,3 @@
         display: none;
     }
 }
-  @media screen and (max-width: 390px){
-    .introCarac{
-        font-size: 2rem;
-    }
-    .about{
-        font-size: smaller;
-       
-    }
-    .navigationDiv{
-        position: absolute;
-        margin-top: 70vh;
-    }
-    .espace{
-        padding-top: 4px;
-        padding-bottom: 4px;
-    }
-    .switch{
-        margin-left: 43%;
-        margin-top: 97vh;
-        z-index: 66;
-    }
-    h3{
-        font-size: 1rem;
-    }
-  }
