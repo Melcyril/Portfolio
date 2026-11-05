@@ -11,8 +11,8 @@
                     <h5>Projet {{projet.id+1}}</h5>
                     <div class="image-container">
                         <p>
-                            <img class="imgComputer"  src="assets/compute.png"/>
-                            <img class="imgProjet"  src="assets/ordi.jpg" (mouseover)="projet.showDetail = true"/>
+                            <img class="imgComputer"  src="assets/compute.png" [attr.alt]=""/>
+                            <img class="imgProjet"  src="assets/ordi.jpg" (mouseover)="projet.showDetail = true" [attr.alt]="'Projet ' + (projet.id + 1)"/>
                         </p>
                 
                         <div class="overlay texte" [@fadeInOut]="projet.detailsVisible ? 'in' : 'out'" *ngIf="!projet.detailsVisible">

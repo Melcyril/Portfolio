@@ -10,6 +10,4 @@ import { TECH_SKILLS } from 'src/shared/skills-mock';
 })
 export class SkillsComponent {
   techSkills = TECH_SKILLS;
-
-
 }

@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import { PROJETS } from '../../shared/projet-mock'; 
 import {Projet} from '../../shared/projet';
-import { count } from 'rxjs';
-import { trigger, state, style, animate, transition, group, query } from '@angular/animations';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-projet',

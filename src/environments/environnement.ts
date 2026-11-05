@@ -7,7 +7,7 @@ export const environment = {
     entreprise_:'melcydev',
     name_:'MELIN',
     surname_:'Cyril',
-    adress_:'133 bd de Paris Lillers',
+    adress_:'Haut de France (62)',
     mymail_:'melcydev@gmail.com',
     myHost_:'GitHub, Inc.',
     adressHost_:'88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA',

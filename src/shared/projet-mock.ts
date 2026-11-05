@@ -140,10 +140,21 @@ export const PROJETS : Projet[]=[
         image: "assets/ordi.jpg",
         technologie: "Angular - ThreeJS",
         description: "Application Web avec présentation de mes compétences - Présentation de mes projets - Présentation de mes loisirs - Formulaire pour me contacter",
-        lien: "https://melcyril.github.io/youyou/",
+        lien: "",
         showDetail: false,
         detailsVisible: false,
         date:2024
+    },
+        {
+        id: ++lastId,
+        titre: "Efact",
+        image: "assets/ordi.jpg",
+        technologie: "BDD : mySQL - API : Node.js - Frontend : Angular",
+        description: "Application E-commerce fictive avec partie admin",
+        lien: "https://melcydev.fr",
+        showDetail: false,
+        detailsVisible: false,
+        date:2026
     },
     
     
