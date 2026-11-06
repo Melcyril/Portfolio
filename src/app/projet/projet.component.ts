@@ -1,110 +1,245 @@
-import { Component, ElementRef, OnInit, Renderer2} from '@angular/core';
-import { PROJETS } from '../../shared/projet-mock'; 
-import {Projet} from '../../shared/projet';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+
+import { Component, ElementRef, OnInit } from '@angular/core';
+
+import { PROJETS } from '../../shared/projet-mock';
+import { Projet } from '../../shared/projet';
+
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'app-projet',
   templateUrl: './projet.component.html',
-  styles: [
-  ],
+  styles: [],
   animations: [
     trigger('fadeInOut', [
+
       state('void', style({
-        display:'none'
-      })),
-      state('void', style({
-        display:'block',
         opacity: 0
       })),
+
       state('*', style({
-        display:'block',
         opacity: 1
       })),
-      transition('void <=> *', animate(800)),
-    ]),
+
+      transition('void <=> *', animate('400ms ease-in-out'))
+
+    ])
   ]
 })
+
 export class ProjetComponent implements OnInit {
-  constructor(private renderer2: Renderer2, private el: ElementRef) {}
 
-  mesProjets:Projet[] = PROJETS;
-  startIndex = this.mesProjets.length-1;
-  suivantIndex= this.startIndex +1
-  opacityProjet  = 1;
-  altMessageNext="Projet"+this.startIndex.toString+"-"+"Projet"+this.suivantIndex.toString()
-  indexOuvert:number=-1
-  tremble: boolean = false;
-  showBtn:boolean = false;
+  constructor(private el: ElementRef) {}
 
-  ajouterTremble() {
+  mesProjets: Projet[] = PROJETS;
+
+  // Index du projet actuellement affiché
+  startIndex = this.mesProjets.length - 1;
+
+  suivantIndex = this.startIndex + 1;
+
+  opacityProjet = 1;
+
+  altMessageNext = '';
+
+  indexOuvert: number = -1;
+
+  tremble = false;
+
+  showBtn = false;
+
+  ngOnInit(): void {
+
+    console.table(this.mesProjets);
+
+    this.actualiserIndex();
+
+  }
+
+  /* ==========================================
+     ACTUALISATION DES INDEX
+  ========================================== */
+
+  actualiserIndex(): void {
+
+    this.suivantIndex = this.startIndex + 1;
+
+    this.altMessageNext =
+      'Projet ' + (this.startIndex + 1) +
+      ' - Projet ' + (this.suivantIndex + 1);
+
+  }
+
+  /* ==========================================
+     ANIMATION DU BOUTON FERMER
+  ========================================== */
+
+  ajouterTremble(): void {
+
     this.tremble = true;
+
   }
 
-  retirerTremble() {
-    this.tremble = false;
-  }
-ngOnInit(): void {
-    
-    console.table(this.mesProjets)
-}
+  retirerTremble(): void {
 
-  afficherDetails(projet: Projet) {
-
-    this.indexOuvert=projet.id
-    for(let i=0;i<this.mesProjets.length;i++){
-
-      if(i==this.indexOuvert){
-
-        this.mesProjets[i].detailsVisible=true
-      }else{
-        this.mesProjets[i].detailsVisible=false
-      }
-    }
-
-    //console.log(projet.id+"-id-")
-    
-  }
-
-  fermerDetails(projet: Projet) {
     this.tremble = false;
 
-    for( let i=0;i<this.mesProjets.length;i++){
-      this.mesProjets[i].detailsVisible=false
+  }
+
+  /* ==========================================
+     AFFICHAGE DES DÉTAILS
+  ========================================== */
+
+  afficherDetails(projet: Projet): void {
+
+    this.indexOuvert = projet.id;
+
+    // Un seul projet peut avoir ses détails ouverts.
+
+    this.mesProjets.forEach((p) => {
+
+      p.detailsVisible = p.id === projet.id;
+
+    });
+
+    // Attend l'affichage du bloc par Angular.
+
+    setTimeout(() => {
+
+      const details = this.el.nativeElement.querySelector(
+        '.details-projet'
+      );
+
+      details?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+
+    }, 100);
+
+  }
+
+  /* ==========================================
+     FERMETURE DES DÉTAILS
+  ========================================== */
+
+  fermerDetails(projet: Projet): void {
+
+    this.tremble = false;
+
+    // Angular gère la suppression grâce au *ngIf.
+
+    this.mesProjets.forEach((p) => {
+
+      p.detailsVisible = false;
+
+    });
+
+    this.indexOuvert = -1;
+
+    // Retour vers la section des projets.
+
+    const scrollProjet = document.getElementById('projet');
+
+    scrollProjet?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+
+  }
+
+  /* ==========================================
+     FERMETURE DE TOUS LES DÉTAILS
+  ========================================== */
+
+  private fermerTousLesDetails(): void {
+
+    this.mesProjets.forEach((projet) => {
+
+      projet.detailsVisible = false;
+
+    });
+
+    this.indexOuvert = -1;
+
+    this.tremble = false;
+
+  }
+
+  /* ==========================================
+     ANIMATION DU CHANGEMENT DE PROJET
+  ========================================== */
+
+  private animerChangementProjet(): void {
+
+    this.opacityProjet = 0;
+
+    setTimeout(() => {
+
+      this.opacityProjet = 1;
+
+    }, 250);
+
+  }
+
+  /* ==========================================
+     PROJET SUIVANT
+  ========================================== */
+
+  showNextProjets(): void {
+
+    if (this.startIndex >= this.mesProjets.length - 1) {
+
+      return;
+
     }
-    const suppDiv=this.el.nativeElement.querySelector('.details-projet')
-    this.renderer2.removeChild(this.el.nativeElement,suppDiv);
-    //projet.detailsVisible = false;
-    const scrollProjet=document.getElementById('projet')
-    if(scrollProjet)
-    scrollProjet.scrollIntoView({ behavior: 'smooth' });
-  }
-  //Visuel des 2 prochains projet
-  showNextProjets() {
-    this.mesProjets[this.startIndex].detailsVisible=false
-    this.mesProjets[this.startIndex+1].detailsVisible=false
- 
 
-    this.opacityProjet = 0; // Réinitialise l'opacité
-    setTimeout(() => {
-      this.opacityProjet  = 1; // Met à jour l'opacité après 0,5 seconde
-    }, 250);
-    this.startIndex += 1;
-  }
-  //Visuel des 2 prochains avant
-  showPreviousProjets() {
-    this.mesProjets[this.startIndex].detailsVisible=false
-    this.mesProjets[this.startIndex-1].detailsVisible=false
-    
- 
+    this.fermerTousLesDetails();
 
-    this.opacityProjet = 0; // Réinitialise l'opacité
-    setTimeout(() => {
-      this.opacityProjet  = 1; // Met à jour l'opacité après 0,5 seconde
-    }, 250);
-    this.startIndex -= 1;
+    this.animerChangementProjet();
+
+    this.startIndex++;
+
+    this.actualiserIndex();
+
   }
-  selectProjet(projet: Projet){
-    console.log(`click sur le projet -> ${projet.titre}`)
+
+  /* ==========================================
+     PROJET PRÉCÉDENT
+  ========================================== */
+
+  showPreviousProjets(): void {
+
+    if (this.startIndex <= 0) {
+
+      return;
+
+    }
+
+    this.fermerTousLesDetails();
+
+    this.animerChangementProjet();
+
+    this.startIndex--;
+
+    this.actualiserIndex();
+
   }
+
+  /* ==========================================
+     SÉLECTION D'UN PROJET
+  ========================================== */
+
+  selectProjet(projet: Projet): void {
+
+    console.log(`click sur le projet -> ${projet.titre}`);
+
+  }
+
 }

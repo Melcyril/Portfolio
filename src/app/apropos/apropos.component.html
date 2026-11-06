@@ -2,8 +2,21 @@
 <app-fullstack [@fadeInOut]="showDiv ? 'out' : 'in'" *ngIf="!showDiv"></app-fullstack>
 
 <div class="navigationDiv">
-            <button class="navigationProjet previous" (mouseover)="showEtiquettePrecedent = true" (mouseout)="showEtiquettePrecedent = false" *ngIf="showDiv" (click)="onToggle(1)">&lt;</button>
-            <span *ngIf="showEtiquettePrecedent" class="etiquettePrecedent">Precedent</span>
-            <button (mouseover)="showEtiquetteSuivant = true" (mouseout)="showEtiquetteSuivant = false" alt="Suivant" class="navigationProjet next" *ngIf="!showDiv" (click)="onToggle(2)">&gt;</button>
-            <span *ngIf="showEtiquetteSuivant" class="etiquetteSuivant">Suivant</span>
+    <button
+        class="navigationProjet previous"
+        *ngIf="showDiv"
+        (click)="onToggle(1)"
+        aria-label="Précédent"
+        title="Précédent">
+        &lt;
+    </button>
+
+    <button
+        class="navigationProjet next"
+        *ngIf="!showDiv"
+        (click)="onToggle(2)"
+        aria-label="Suivant"
+        title="Suivant">
+        &gt;
+    </button>
 </div>

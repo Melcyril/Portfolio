@@ -1,48 +1,184 @@
-<hr class="hr-line"  id="projet">
-   <section class="projet" #madivRef>
-        <h2>{{mesProjets.length+" "}}projets réalisés : </h2>
-        <div class="navigationProjetDiv">
-            <button class="navigationProjet previous" (click)="showPreviousProjets()" [ngStyle]="{ 'display': startIndex === 0 ? 'none' : 'block' }">&lt;</button>
-            <button alt="Suivant" class="navigationProjet next" (click)="showNextProjets()" [ngStyle]="{ 'display':startIndex + 1 >= mesProjets.length? 'none' : 'block' }">&gt;</button>
-        </div>
-        <div class="mesprojets">
-            <article class="monprojet" *ngFor="let projet of mesProjets">
-                <div class="projetOpacity"  *ngIf="projet.id >= startIndex && projet.id < startIndex + 1" [style.opacity]="opacityProjet">
-                    <h5>Projet {{projet.id+1}}</h5>
+
+<hr class="hr-line" id="projet">
+
+<section class="projet" #madivRef>
+
+    <h2>
+        {{ mesProjets.length + " " }}projets réalisés :
+    </h2>
+
+    <!-- Navigation entre les projets -->
+
+    <div class="navigationProjetDiv">
+
+        <button
+            class="navigationProjet previous"
+            (click)="showPreviousProjets()"
+            [style.display]="startIndex === 0 ? 'none' : 'block'"
+            aria-label="Projet précédent">
+
+            &lt;
+
+        </button>
+
+        <button
+            class="navigationProjet next"
+            (click)="showNextProjets()"
+            [style.display]="startIndex >= mesProjets.length - 1 ? 'none' : 'block'"
+            aria-label="Projet suivant">
+
+            &gt;
+
+        </button>
+
+    </div>
+
+    <!-- Liste des projets -->
+
+    <div class="mesprojets">
+
+        <ng-container *ngFor="let projet of mesProjets">
+
+            <!-- Seul le projet sélectionné est créé dans le DOM -->
+
+            <article
+                class="monprojet"
+                *ngIf="projet.id === startIndex">
+
+                <div
+                    class="projetOpacity"
+                    [style.opacity]="opacityProjet">
+
+                    <h5>
+                        Projet {{ projet.id + 1 }}
+                    </h5>
+
+                    <!-- Image du projet -->
+
                     <div class="image-container">
+
                         <p>
-                            <img class="imgComputer"  src="assets/compute.png" [attr.alt]=""/>
-                            <img class="imgProjet"  src="assets/ordi.jpg" (mouseover)="projet.showDetail = true" [attr.alt]="'Projet ' + (projet.id + 1)"/>
+
+                            <img
+                                class="imgComputer"
+                                src="assets/compute.png"
+                                alt="Ordinateur présentant le projet">
+
+                            <img
+                                class="imgProjet"
+                                src="assets/ordi.jpg"
+                                [attr.alt]="'Capture du projet ' + (projet.id + 1)">
+
                         </p>
-                
-                        <div class="overlay texte" [@fadeInOut]="projet.detailsVisible ? 'in' : 'out'" *ngIf="!projet.detailsVisible">
-                            <h4>{{ projet.titre}}</h4>
-                        <a class="menuLien orange" (click)="afficherDetails(projet)">-> Voir détails &lt;-</a>       
+
+                        <!-- Overlay lorsque les détails sont fermés -->
+
+                        <div
+                            class="overlay texte"
+                            *ngIf="!projet.detailsVisible"
+                            @fadeInOut>
+
+                            <h4>
+                                {{ projet.titre }}
+                            </h4>
+
+                            <a
+                                class="menuLien orange"
+                                (click)="afficherDetails(projet)">
+
+                                -&gt; Voir détails &lt;-
+
+                            </a>
+
                         </div>
-                        <div class="overlay texte" [@fadeInOut]="projet.detailsVisible ? 'in' : 'out'" *ngIf="projet.detailsVisible">
-                            <h4>{{ projet.titre}}</h4>      
+
+                        <!-- Overlay lorsque les détails sont ouverts -->
+
+                        <div
+                            class="overlay texte"
+                            *ngIf="projet.detailsVisible"
+                            @fadeInOut>
+
+                            <h4>
+                                {{ projet.titre }}
+                            </h4>
+
                         </div>
-                    </div>  
-                  
-                    <div class="details-projet"  *ngIf="projet.detailsVisible" [@fadeInOut]="projet.detailsVisible ? 'in' : 'out'">           
-                        <h3>{{ projet.titre}}</h3>
-                        <p class="orange vert">Technologie(s) utilisée(s) </p>
-                        <p class="data-projet">{{projet.technologie}}</p>
-                        <p class="orange">Description</p> 
-                        <p class="data-projet">{{projet.description}}</p>
-                        <h3 *ngIf="projet.lien !== ''">Lien</h3>
-                        <p *ngIf="projet.lien !== ''"><a href={{projet.lien}}>{{projet.lien}}</a></p>
-                        <a class="close copyright"  (click)="fermerDetails(projet)"><p (mouseenter)="ajouterTremble()" (mouseleave)="retirerTremble()" [class.tremble]="tremble">FERMER</p></a>
+
                     </div>
-               
+
+                    <!-- Informations détaillées -->
+
+                    <div
+                        class="details-projet"
+                        *ngIf="projet.detailsVisible"
+                        @fadeInOut>
+
+                        <h3>
+                            {{ projet.titre }}
+                        </h3>
+
+                        <p class="orange vert">
+                            Technologie(s) utilisée(s)
+                        </p>
+
+                        <p class="data-projet">
+                            {{ projet.technologie }}
+                        </p>
+
+                        <p class="orange">
+                            Description
+                        </p>
+
+                        <p class="data-projet">
+                            {{ projet.description }}
+                        </p>
+
+                        <h3 *ngIf="projet.lien !== ''">
+                            Lien
+                        </h3>
+
+                        <p *ngIf="projet.lien !== ''">
+
+                            <a
+                                [href]="projet.lien"
+                                target="_blank"
+                                rel="noopener noreferrer">
+
+                                {{ projet.lien }}
+
+                            </a>
+
+                        </p>
+
+                        <!-- Bouton fermer -->
+
+                        <a
+                            class="close copyright"
+                            role="button"
+                            tabindex="0"
+                            (click)="fermerDetails(projet)"
+                            (keydown.enter)="fermerDetails(projet)">
+
+                            <p
+                                (mouseenter)="ajouterTremble()"
+                                (mouseleave)="retirerTremble()"
+                                [class.tremble]="tremble">
+
+                                FERMER
+
+                            </p>
+
+                        </a>
+
+                    </div>
+
                 </div>
+
             </article>
 
-        </div>
+        </ng-container>
 
-   
+    </div>
 
-    </section>
-
-
- 
+</section>
