@@ -140,10 +140,10 @@ export const PROJETS : Projet[]=[
         image: "assets/ordi.jpg",
         technologie: "Angular - ThreeJS",
         description: "Application Web avec présentation de mes compétences - Présentation de mes projets - Présentation de mes loisirs - Formulaire pour me contacter",
-        lien: "",
+        lien: "https://melcyril.github.io/Portfolio/",
         showDetail: false,
         detailsVisible: false,
-        date:2024
+        date:2025
     },
         {
         id: ++lastId,
