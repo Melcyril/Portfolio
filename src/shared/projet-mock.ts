@@ -150,7 +150,7 @@ export const PROJETS : Projet[]=[
         titre: "Efact",
         image: "assets/ordi.jpg",
         technologie: "BDD : mySQL - API : Node.js - Frontend : Angular",
-        description: "Application E-commerce fictive avec partie admin",
+        description: "Application e-commerce fictive avec espace d'administration. Déployée sur un serveur VPS avec configuration Docker, Nginx et Caddy.",
         lien: "https://melcydev.fr",
         showDetail: false,
         detailsVisible: false,

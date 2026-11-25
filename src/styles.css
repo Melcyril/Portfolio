@@ -62,25 +62,46 @@ body {
     top: 0;
     left: 0;
     z-index: 100;
+
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
     width: 100%;
     height: 76px;
     padding: 0 5%;
+
     background-color: rgb(33, 21, 21);
     border-bottom: 1px solid rgba(206, 106, 6, 0.4);
 }
 
+/* Identité : MelCyDev + spécialité */
+
+.identite {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+        position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
 .nom {
     position: relative;
-    left: auto;
+    display: inline-block;
     margin: 0;
+
+    color: rgb(206, 108, 16);
     font-size: 1.7rem;
     font-weight: bold;
     letter-spacing: 1px;
     text-decoration: none;
-    color: rgb(206, 108, 16);
     text-shadow: 1px 1px 2px rgba(255, 131, 6, 0.5);
+    white-space: nowrap;
+
+    animation: arriveGauche 0.8s ease-out both;
+
     transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
@@ -94,8 +115,19 @@ html[native-dark-active] .nom {
     color: #ff0808;
 }
 
-.mobilePresentation {
-    display: none;
+/* Spécialité */
+
+.specialite {
+    display: inline-block;
+
+    color: whitesmoke;
+    font-size: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+
+    opacity: 0;
+
+    animation: apparitionSpecialite 0.7s ease-out 0.8s forwards;
 }
 
 .nomSpan {
@@ -112,48 +144,110 @@ html[native-dark-active] .nom {
     text-shadow: 1px 1px 2px rgb(255, 131, 6);
 }
 
+.mobilePresentation {
+    display: none;
+}
+
+/* =========================================================
+   ANIMATIONS DE L'IDENTITÉ
+========================================================= */
+
+@keyframes arriveGauche {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes apparitionSpecialite {
+    from {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* =========================================================
+   NAVIGATION PRINCIPALE
+========================================================= */
+
 .navbar {
     position: fixed;
     top: 76px;
     left: 0;
     z-index: 99;
+
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     gap: 35px;
+
     width: 100%;
     margin: 0;
     padding: 16px 5%;
+
     background-color: rgba(33, 21, 21, 0.97);
     border-bottom: 1px solid rgba(206, 106, 6, 0.35);
+
     list-style: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .navbar li {
-    display: block;
+    display: flex;
+    align-items: center;
     margin: 0;
 }
+
+/* Liens du menu : zone de survol agrandie */
 
 .menuLien,
 .mentionLien {
     display: inline-block;
+
+    padding: 12px 20px;
+
     color: whitesmoke;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     font-weight: 600;
+    letter-spacing: 1px;
     text-decoration: none;
     text-transform: uppercase;
+
     opacity: 0.75;
     cursor: pointer;
-    transition: color 0.25s ease, opacity 0.25s ease;
+
+    transition:
+        letter-spacing 0.3s ease,
+        color 0.3s ease,
+        opacity 0.3s ease;
 }
 
-.menuLien:hover,
+/* Animation au survol de toute la zone du lien */
+
+.navbar li:hover .menuLien,
+.navbar .menuLien:focus-visible {
+    color: rgb(255, 160, 65);
+    letter-spacing: 3px;
+    opacity: 1;
+}
+
 .mentionLien:hover {
     color: rgb(255, 160, 65);
     opacity: 1;
 }
+
+/* Lien actif */
 
 .menuLien.active,
 .active {
@@ -161,12 +255,16 @@ html[native-dark-active] .nom {
     opacity: 1;
 }
 
+/* Accessibilité clavier */
+
 .menuLien:focus-visible,
 .mentionLien:focus-visible,
 .nom:focus-visible {
     outline: 2px solid rgb(255, 160, 65);
     outline-offset: 4px;
 }
+
+/* Bouton hamburger */
 
 .menu-button {
     display: none;
@@ -287,7 +385,6 @@ h4 {
     margin: 10px auto;
     padding: 10px;
     color: whitesmoke;
-    background-color: rgba(206, 51, 6, 0.7);
     border-radius: 4px;
     text-shadow: 2px 2px 2px #800000;
 }
@@ -384,7 +481,9 @@ h4 {
     font-size: 1.2rem;
 }
 
-/* Image et cadre */
+/* =========================================================
+   IMAGE DU PROJET
+========================================================= */
 
 .image-container {
     position: relative;
@@ -404,87 +503,103 @@ h4 {
     display: block;
     width: 100%;
     height: 100%;
-    padding: 5px;
+    padding: 1.1%;
     object-fit: contain;
 }
 
 .imgProjet {
     position: absolute;
-    top: 6%;
+    top: 5.3%;
     right: 22%;
     z-index: 2;
-    width: 57%;
-    height: 57%;
+    width: 56.2%;
+    height: 57.8%;
     padding: 0;
     object-fit: cover;
+
     opacity: 0.85;
+    filter: brightness(0.45);
+
     box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.1s ease, opacity 0.1s ease, filter 0.1s ease;
 }
 
 .image-container:hover p img {
     transform: scale(1.03);
 }
 
-/* Superposition sur l'image */
+/* =========================================================
+   OVERLAY SUR L'IMAGE
+========================================================= */
 
 .overlay {
     position: absolute;
-    inset: 0;
+    top: 33.333%;
+    left: 0;
     z-index: 3;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 8px;
+
     width: 100%;
-    height: 100%;
-    padding: 15px;
-    background-color: rgba(20, 15, 15, 0.85);
+    height: auto;
+    padding: 10px;
+
+    background-color: transparent;
     opacity: 1;
-    transition: opacity 0.3s ease, background-color 0.3s ease;
+    transform: translateY(-50%);
+
+    transition: opacity 0.3s ease;
 }
 
 .image-container:hover .overlay {
-    background-color: rgba(20, 15, 15, 0.9);
+    background-color: transparent;
 }
 
 .texte {
     text-align: center;
 }
 
-/* Titre dans l'overlay */
-
 .image-container .overlay h4 {
     width: min(57%, 100%);
-    margin: 10px 21% 10px auto;
+    margin: 0 21% 0 auto;
     padding: 10px;
-    color: whitesmoke;
+    font-size: larger;
+    color: rgb(255, 237, 228);
     text-align: center;
-    background-color: rgba(206, 51, 6, 0.7);
+    background: transparent;
+    border: none;
     border-radius: 4px;
-    text-shadow: 2px 2px 2px #800000;
+    text-shadow: 2px 2px 4px black;
     overflow-wrap: anywhere;
 }
-
-/* Lien Voir détails */
 
 .image-container .overlay .menuLien {
     display: inline-block;
     max-width: 100%;
     margin: 0;
     padding: 10px 14px;
+
     color: rgb(255, 160, 65);
     font-size: clamp(12px, 2.5vw, 16px);
     font-weight: 600;
     text-align: center;
     text-decoration: none;
+
+    background: transparent;
     cursor: pointer;
     overflow-wrap: anywhere;
-    transition: color 0.25s ease, background-color 0.25s ease;
+
+    text-shadow: 1px 1px 3px black;
+    transition: color 0.25s ease;
 }
 
 .image-container .overlay .menuLien:hover {
     color: whitesmoke;
+    background: transparent;
 }
 
 .lien-voir-detail {
@@ -502,7 +617,92 @@ h4 {
     text-align: center;
 }
 
-/* Détails sous l'image */
+/* =========================================================
+   NAVIGATION DES PROJETS
+========================================================= */
+
+.navigationProjetDiv {
+    position: absolute;
+    top: 33.333%;
+    left: 0;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    margin: 0;
+    padding: 0 12px;
+
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.navigationProjet {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 45px;
+    height: 45px;
+    padding: 0;
+
+    color: white;
+    font-size: 2rem;
+    line-height: 1;
+
+    background-color: rgba(33, 21, 21, 0.75);
+    border: 1px solid rgba(206, 106, 6, 0.8);
+    border-radius: 50%;
+
+    cursor: pointer;
+    pointer-events: auto;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.navigationProjet:hover {
+    color: white;
+    background-color: rgb(156, 65, 15);
+    transform: scale(1.1);
+}
+
+.navigationProjet:focus-visible {
+    outline: 2px solid rgb(255, 160, 65);
+    outline-offset: 3px;
+}
+
+.previous,
+.next {
+    position: relative;
+    left: auto;
+    margin: 0;
+}
+
+.etiquetteSuivant,
+.etiquettePrecedent {
+    position: absolute;
+    top: 50px;
+    color: #ddd;
+    font-size: 0.8rem;
+}
+
+.etiquettePrecedent {
+    left: 0;
+}
+
+.etiquetteSuivant {
+    right: 0;
+}
+
+/* =========================================================
+   DÉTAILS DU PROJET
+========================================================= */
 
 .details-projet {
     position: relative;
@@ -551,71 +751,9 @@ h4 {
     color: whitesmoke;
 }
 
-/* Navigation des projets */
-
-.navigationProjetDiv {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin: 15px 0;
-}
-
-.navigationProjet {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 45px;
-    height: 45px;
-    padding: 0;
-    color: rgb(190, 32, 32);
-    font-size: 2rem;
-    line-height: 1;
-    background-color: transparent;
-    border: 1px solid #800000;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-}
-
-.navigationProjet:hover {
-    color: white;
-    background-color: rgba(206, 106, 6, 0.5);
-    border-color: #800000;
-    transform: scale(1.05);
-}
-
-.navigationProjet:focus-visible {
-    outline: 2px solid rgb(255, 160, 65);
-    outline-offset: 4px;
-}
-
-.previous,
-.next {
-    position: relative;
-    left: auto;
-    margin: 0;
-}
-
-.etiquetteSuivant,
-.etiquettePrecedent {
-    position: absolute;
-    top: 50px;
-    color: #ddd;
-    font-size: 0.8rem;
-}
-
-.etiquettePrecedent {
-    left: 0;
-}
-
-.etiquetteSuivant {
-    right: 0;
-}
-
-/* Bouton fermer */
+/* =========================================================
+   BOUTON FERMER
+========================================================= */
 
 .close {
     position: relative;
@@ -669,12 +807,11 @@ h4 {
     border: 1px solid #800000;
     border-radius: 50%;
     cursor: pointer;
-    transition: color 0.2s ease,
-                background-color 0.2s ease,
-                transform 0.2s ease;
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
 }
-
-/* Position des boutons */
 
 .navigationDiv .previous {
     margin-right: auto;
@@ -684,15 +821,11 @@ h4 {
     margin-left: auto;
 }
 
-/* Survol */
-
 .navigationDiv .navigationProjet:hover {
     color: white;
     background-color: rgba(206, 106, 6, 0.5);
     transform: scale(1.05);
 }
-
-/* Étiquettes générées en CSS */
 
 .navigationDiv .navigationProjet::after {
     position: absolute;
@@ -755,8 +888,8 @@ form {
 input,
 textarea {
     width: 100%;
-    padding: 12px;
     margin: 0;
+    padding: 12px;
     color: whitesmoke;
     background-color: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(206, 106, 6, 0.5);
@@ -912,8 +1045,16 @@ form button:disabled {
         padding: 0 20px;
     }
 
+    .identite {
+        gap: 10px;
+    }
+
     .nom {
         font-size: 1.4rem;
+    }
+
+    .specialite {
+        font-size: 0.75rem;
     }
 
     .menu-button {
@@ -949,6 +1090,7 @@ form button:disabled {
     }
 
     .navbar li {
+        display: block;
         width: 100%;
         text-align: center;
         border-bottom: 1px solid rgba(206, 106, 6, 0.15);
@@ -958,10 +1100,10 @@ form button:disabled {
         border-bottom: 0;
     }
 
-    .menuLien {
+    .navbar .menuLien {
         display: block;
         width: 100%;
-        padding: 14px 5px;
+        padding: 12px 20px 12px 0;
         font-size: 0.9rem;
     }
 
@@ -1037,13 +1179,17 @@ form button:disabled {
     }
 
     .image-container .overlay {
+        top: 33.333%;
+        height: auto;
         padding: 10px;
+        transform: translateY(-50%);
+        background-color: transparent;
     }
 
     .image-container .overlay h4 {
-        width: 100%;
+        width: min(57%, 100%);
         max-width: 100%;
-        margin: 0 0 10px;
+        margin: 0 21% 0 auto;
         padding: 8px;
         font-size: clamp(0.85rem, 3vw, 1rem);
     }
@@ -1054,13 +1200,33 @@ form button:disabled {
         padding: 8px 12px;
         font-size: 0.85rem;
         line-height: 1.3;
+        background: transparent;
+    }
+
+    .navigationProjetDiv {
+        top: 33.333%;
+        padding: 0 8px;
+    }
+
+    .navigationProjet {
+        width: 38px;
+        height: 38px;
+        font-size: 1.6rem;
     }
 }
 
 @media screen and (max-width: 420px) {
 
+    .identite {
+        gap: 7px;
+    }
+
     .nom {
         font-size: 1.2rem;
+    }
+
+    .specialite {
+        font-size: 0.65rem;
     }
 
     .about,
@@ -1092,12 +1258,15 @@ form button:disabled {
     }
 
     .image-container .overlay {
+        top: 33.333%;
         padding: 6px;
+        transform: translateY(-50%);
+        background-color: transparent;
     }
 
     .image-container .overlay h4 {
-        width: 100%;
-        margin: 0 0 6px;
+        width: min(57%, 100%);
+        margin: 0 21% 0 auto;
         padding: 5px;
         font-size: 0.8rem;
     }
@@ -1105,6 +1274,7 @@ form button:disabled {
     .image-container .overlay .menuLien {
         padding: 6px 9px;
         font-size: 0.75rem;
+        background: transparent;
     }
 
     .details-projet h3 {
@@ -1118,6 +1288,17 @@ form button:disabled {
     .close {
         font-size: 0.85rem;
         letter-spacing: 2px;
+    }
+
+    .navigationProjetDiv {
+        top: 33.333%;
+        padding: 0 5px;
+    }
+
+    .navigationProjet {
+        width: 32px;
+        height: 32px;
+        font-size: 1.4rem;
     }
 }
 
@@ -1134,5 +1315,11 @@ form button:disabled {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+
+    .presentation .nom,
+    .specialite {
+        opacity: 1;
+        transform: none;
     }
 }

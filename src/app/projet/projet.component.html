@@ -4,43 +4,15 @@
 <section class="projet" #madivRef>
 
     <h2>
-        {{ mesProjets.length + " " }}projets réalisés :
+        {{ mesProjets.length }} projets réalisés :
     </h2>
 
-    <!-- Navigation entre les projets -->
-
-    <div class="navigationProjetDiv">
-
-        <button
-            class="navigationProjet previous"
-            (click)="showPreviousProjets()"
-            [style.display]="startIndex === 0 ? 'none' : 'block'"
-            aria-label="Projet précédent">
-
-            &lt;
-
-        </button>
-
-        <button
-            class="navigationProjet next"
-            (click)="showNextProjets()"
-            [style.display]="startIndex >= mesProjets.length - 1 ? 'none' : 'block'"
-            aria-label="Projet suivant">
-
-            &gt;
-
-        </button>
-
-    </div>
-
     <!-- Liste des projets -->
-
     <div class="mesprojets">
 
         <ng-container *ngFor="let projet of mesProjets">
 
             <!-- Seul le projet sélectionné est créé dans le DOM -->
-
             <article
                 class="monprojet"
                 *ngIf="projet.id === startIndex">
@@ -53,12 +25,10 @@
                         Projet {{ projet.id + 1 }}
                     </h5>
 
-                    <!-- Image du projet -->
-
+                    <!-- Image et navigation -->
                     <div class="image-container">
 
                         <p>
-
                             <img
                                 class="imgComputer"
                                 src="assets/compute.png"
@@ -68,11 +38,34 @@
                                 class="imgProjet"
                                 src="assets/ordi.jpg"
                                 [attr.alt]="'Capture du projet ' + (projet.id + 1)">
-
                         </p>
 
-                        <!-- Overlay lorsque les détails sont fermés -->
+                        <!-- Navigation au premier tiers de l'image -->
+                        <div class="navigationProjetDiv">
 
+                            <button
+                                class="navigationProjet previous"
+                                (click)="showPreviousProjets()"
+                                [style.display]="startIndex === 0 ? 'none' : 'flex'"
+                                aria-label="Projet précédent">
+
+                                &lt;
+
+                            </button>
+
+                            <button
+                                class="navigationProjet next"
+                                (click)="showNextProjets()"
+                                [style.display]="startIndex >= mesProjets.length - 1 ? 'none' : 'flex'"
+                                aria-label="Projet suivant">
+
+                                &gt;
+
+                            </button>
+
+                        </div>
+
+                        <!-- Overlay lorsque les détails sont fermés -->
                         <div
                             class="overlay texte"
                             *ngIf="!projet.detailsVisible"
@@ -83,8 +76,11 @@
                             </h4>
 
                             <a
-                                class="menuLien orange"
-                                (click)="afficherDetails(projet)">
+                                class="menuLien"
+                                role="button"
+                                tabindex="0"
+                                (click)="afficherDetails(projet)"
+                                (keydown.enter)="afficherDetails(projet)">
 
                                 -&gt; Voir détails &lt;-
 
@@ -93,7 +89,6 @@
                         </div>
 
                         <!-- Overlay lorsque les détails sont ouverts -->
-
                         <div
                             class="overlay texte"
                             *ngIf="projet.detailsVisible"
@@ -108,7 +103,6 @@
                     </div>
 
                     <!-- Informations détaillées -->
-
                     <div
                         class="details-projet"
                         *ngIf="projet.detailsVisible"
@@ -152,7 +146,6 @@
                         </p>
 
                         <!-- Bouton fermer -->
-
                         <a
                             class="close copyright"
                             role="button"
