@@ -54,7 +54,7 @@ body {
 }
 
 /* =========================================================
-   MENU
+   MENU ET IDENTITÉ
 ========================================================= */
 
 .presentation {
@@ -62,52 +62,61 @@ body {
     top: 0;
     left: 0;
     z-index: 100;
-
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
+    justify-content: flex-start;
     width: 100%;
     height: 76px;
     padding: 0 5%;
-
     background-color: rgb(33, 21, 21);
     border-bottom: 1px solid rgba(206, 106, 6, 0.4);
 }
 
-/* Identité : MelCyDev + spécialité */
-
 .identite {
+    position: relative;
+    left: auto;
+    transform: none;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
     gap: 22px;
-        position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    overflow: hidden;
+    overflow: visible;
 }
 
 .nom {
-    position: relative;
     display: inline-block;
     margin: 0;
-
-    color: rgb(206, 108, 16);
     font-size: 1.7rem;
     font-weight: bold;
     letter-spacing: 1px;
     text-decoration: none;
-    text-shadow: 1px 1px 2px rgba(255, 131, 6, 0.5);
     white-space: nowrap;
+    cursor: pointer;
+}
 
-    animation: arriveGauche 0.8s ease-out both;
+.mel {
+    display: inline-block;
+    color: rgb(206, 108, 16);
+    opacity: 0;
+    animation: apparitionMel 0.6s ease-out 0.1s forwards;
+}
 
-    transition: color 0.3s ease, letter-spacing 0.3s ease;
+.cy {
+    display: inline-block;
+    color: rgb(225, 125, 35);
+    opacity: 0;
+    animation: apparitionCy 0.6s ease-out 0.55s forwards;
+}
+
+.dev {
+    display: inline-block;
+    color: rgb(255, 160, 65);
+    opacity: 0;
+    transform: translateX(35px);
+    animation: arriveDev 0.7s ease-out 1s forwards;
 }
 
 .nom:hover {
-    color: #ffb15c;
-    letter-spacing: 1.5px;
     cursor: pointer;
 }
 
@@ -115,19 +124,31 @@ html[native-dark-active] .nom {
     color: #ff0808;
 }
 
-/* Spécialité */
+/* =========================================================
+   POLICE MELCYDEV
+========================================================= */
+
+.policeMelCyDev {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+/* =========================================================
+   SPÉCIALITÉ : DÉVELOPPEUR WEB
+========================================================= */
 
 .specialite {
     display: inline-block;
-
     color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     font-weight: 500;
+    letter-spacing: 7px;
     white-space: nowrap;
-
     opacity: 0;
-
-    animation: apparitionSpecialite 0.7s ease-out 0.8s forwards;
+    transform: translateX(15px);
+    animation: apparitionSpecialite 0.9s ease-out 1.65s forwards;
 }
 
 .nomSpan {
@@ -152,10 +173,34 @@ html[native-dark-active] .nom {
    ANIMATIONS DE L'IDENTITÉ
 ========================================================= */
 
-@keyframes arriveGauche {
+@keyframes apparitionMel {
     from {
         opacity: 0;
-        transform: translateX(-100px);
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes apparitionCy {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes arriveDev {
+    from {
+        opacity: 0;
+        transform: translateX(35px);
     }
 
     to {
@@ -165,13 +210,19 @@ html[native-dark-active] .nom {
 }
 
 @keyframes apparitionSpecialite {
-    from {
+    0% {
         opacity: 0;
-        transform: translateX(-15px);
+        letter-spacing: 7px;
+        transform: translateX(15px);
     }
 
-    to {
+    60% {
         opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        letter-spacing: 0;
         transform: translateX(0);
     }
 }
@@ -182,25 +233,37 @@ html[native-dark-active] .nom {
 
 .navbar {
     position: fixed;
-    top: 76px;
-    left: 0;
-    z-index: 99;
-
+    top: 0;
+    right: 5%;
+    left: auto;
+    z-index: 101;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 35px;
-
-    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: auto;
+    height: 76px;
     margin: 0;
-    padding: 16px 5%;
-
-    background-color: rgba(33, 21, 21, 0.97);
-    border-bottom: 1px solid rgba(206, 106, 6, 0.35);
-
+    padding: 0;
+    background-color: transparent;
+    border: 0;
     list-style: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+    opacity: 0;
+    animation: apparitionMenu 0.8s ease-out 2.45s forwards;
+}
+
+@keyframes apparitionMenu {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .navbar li {
@@ -209,36 +272,28 @@ html[native-dark-active] .nom {
     margin: 0;
 }
 
-/* Liens du menu : zone de survol agrandie */
-
 .menuLien,
 .mentionLien {
     display: inline-block;
-
-    padding: 12px 20px;
-
+    padding: 12px 14px;
     color: whitesmoke;
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 1px;
     text-decoration: none;
     text-transform: uppercase;
-
     opacity: 0.75;
     cursor: pointer;
-
     transition:
         letter-spacing 0.3s ease,
         color 0.3s ease,
         opacity 0.3s ease;
 }
 
-/* Animation au survol de toute la zone du lien */
-
 .navbar li:hover .menuLien,
 .navbar .menuLien:focus-visible {
     color: rgb(255, 160, 65);
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     opacity: 1;
 }
 
@@ -247,15 +302,11 @@ html[native-dark-active] .nom {
     opacity: 1;
 }
 
-/* Lien actif */
-
 .menuLien.active,
 .active {
     color: rgb(255, 160, 65);
     opacity: 1;
 }
-
-/* Accessibilité clavier */
 
 .menuLien:focus-visible,
 .mentionLien:focus-visible,
@@ -264,10 +315,46 @@ html[native-dark-active] .nom {
     outline-offset: 4px;
 }
 
-/* Bouton hamburger */
-
 .menu-button {
     display: none;
+}
+
+/* =========================================================
+   AJUSTEMENT POUR LES ÉCRANS INTERMÉDIAIRES
+========================================================= */
+
+@media screen and (min-width: 769px) and (max-width: 1100px) {
+
+    .presentation {
+        padding: 0 3%;
+    }
+
+    .identite {
+        gap: 12px;
+    }
+
+    .nom {
+        font-size: 1.45rem;
+    }
+
+    .specialite {
+        font-size: 0.8rem;
+    }
+
+    .navbar {
+        right: 3%;
+        gap: 0;
+    }
+
+    .menuLien {
+        padding: 10px 8px;
+        font-size: 0.62rem;
+        letter-spacing: 0.5px;
+    }
+
+    .navbar li:hover .menuLien {
+        letter-spacing: 1px;
+    }
 }
 
 /* =========================================================
@@ -319,8 +406,15 @@ html[native-dark-active] .nom {
     margin: 12px 0;
     padding: 0 3%;
     color: #d0d0d0;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     line-height: 1.8;
+}
+
+.about.policeMelCyDev p {
+    font-family: inherit;
+    letter-spacing: 0.3px;
+    line-height: 1.9;
 }
 
 .fullstack {
@@ -411,39 +505,53 @@ h4 {
 ========================================================= */
 
 .skills {
-    width: min(1000px, 90%);
+    width: min(750px, 90%);
+    margin: 25px auto;
+    padding: 15px;
+}
+
+.articleSkills {
+    padding: 18px;
+}
+
+.articleSkills h2 {
+    margin-bottom: 15px;
+    padding: 8px;
+    font-size: 1.2rem;
 }
 
 .tech-skills-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 25px;
     width: 100%;
 }
 
 .tech-skill-column {
-    flex: 1 1 40%;
-    min-width: 220px;
-    padding: 10px;
+    min-width: 0;
+    padding: 5px 8px;
 }
 
 .tech-skill-column h3 {
-    margin: 10px 0;
+    margin: 5px 0 8px;
+    padding: 5px;
+    font-size: 0.9rem;
+    text-shadow: none;
 }
 
 .progress-bar-container {
     width: 100%;
-    height: 10px;
-    margin: 10px 0;
+    height: 7px;
+    margin: 5px 0;
     overflow: hidden;
-    background-color: #e0e0e0;
-    border-radius: 4px;
+    background-color: rgba(224, 224, 224, 0.2);
+    border-radius: 10px;
 }
 
 .progress-bar {
     height: 100%;
     background-color: rgb(206, 106, 6);
-    border-radius: 4px;
+    border-radius: 10px;
     transition: width 0.5s ease-in-out;
 }
 
@@ -516,10 +624,8 @@ h4 {
     height: 57.8%;
     padding: 0;
     object-fit: cover;
-
     opacity: 0.85;
     filter: brightness(0.45);
-
     box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.5);
     transition: transform 0.1s ease, opacity 0.1s ease, filter 0.1s ease;
 }
@@ -537,21 +643,17 @@ h4 {
     top: 33.333%;
     left: 0;
     z-index: 3;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 8px;
-
     width: 100%;
     height: auto;
     padding: 10px;
-
     background-color: transparent;
     opacity: 1;
     transform: translateY(-50%);
-
     transition: opacity 0.3s ease;
 }
 
@@ -582,17 +684,14 @@ h4 {
     max-width: 100%;
     margin: 0;
     padding: 10px 14px;
-
     color: rgb(255, 160, 65);
     font-size: clamp(12px, 2.5vw, 16px);
     font-weight: 600;
     text-align: center;
     text-decoration: none;
-
     background: transparent;
     cursor: pointer;
     overflow-wrap: anywhere;
-
     text-shadow: 1px 1px 3px black;
     transition: color 0.25s ease;
 }
@@ -618,7 +717,90 @@ h4 {
 }
 
 /* =========================================================
+   STYLE COMMUN DES BOUTONS DE NAVIGATION
+========================================================= */
+
+.navigationProjet {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    margin: 0;
+
+    color: rgb(255, 160, 65);
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1;
+
+    background: linear-gradient(
+        145deg,
+        rgba(156, 65, 15, 0.25),
+        rgba(33, 21, 21, 0.95)
+    );
+
+    border: 1px solid rgba(206, 106, 6, 0.8);
+    border-radius: 50%;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.35),
+        inset 0 0 8px rgba(206, 106, 6, 0.08);
+
+    cursor: pointer;
+    pointer-events: auto;
+
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease,
+        background-color 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.navigationProjet:hover {
+    color: white;
+    background-color: rgb(156, 65, 15);
+    border-color: rgb(255, 160, 65);
+
+    box-shadow:
+        0 0 8px rgba(206, 106, 6, 0.5),
+        0 0 20px rgba(206, 106, 6, 0.25);
+
+    transform: scale(1.12);
+}
+
+.navigationProjet span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.navigationProjet.previous:hover span {
+    transform: translateX(-3px);
+}
+
+.navigationProjet.next:hover span {
+    transform: translateX(3px);
+}
+
+.navigationProjet:focus-visible {
+    outline: 2px solid rgb(255, 160, 65);
+    outline-offset: 4px;
+}
+
+.previous,
+.next {
+    position: relative;
+    left: auto;
+    right: auto;
+    margin: 0;
+}
+
+/* =========================================================
    NAVIGATION DES PROJETS
+   Boutons sur les côtés de l'image
 ========================================================= */
 
 .navigationProjetDiv {
@@ -639,55 +821,15 @@ h4 {
     pointer-events: none;
 }
 
-.navigationProjet {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 45px;
-    height: 45px;
-    padding: 0;
-
-    color: white;
-    font-size: 2rem;
-    line-height: 1;
-
-    background-color: rgba(33, 21, 21, 0.75);
-    border: 1px solid rgba(206, 106, 6, 0.8);
-    border-radius: 50%;
-
-    cursor: pointer;
+.navigationProjetDiv .navigationProjet {
+    flex-shrink: 0;
     pointer-events: auto;
-
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.navigationProjet:hover {
-    color: white;
-    background-color: rgb(156, 65, 15);
-    transform: scale(1.1);
-}
-
-.navigationProjet:focus-visible {
-    outline: 2px solid rgb(255, 160, 65);
-    outline-offset: 3px;
-}
-
-.previous,
-.next {
-    position: relative;
-    left: auto;
-    margin: 0;
 }
 
 .etiquetteSuivant,
 .etiquettePrecedent {
     position: absolute;
-    top: 50px;
+    top: 60px;
     color: #ddd;
     font-size: 0.8rem;
 }
@@ -722,6 +864,16 @@ h4 {
     color: #e0e0e0;
     text-shadow: none;
     overflow-wrap: anywhere;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.data-projet.policeMelCyDev {
+    font-family: inherit;
+    font-size: 0.98rem;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    line-height: 1.9;
+    text-align: justify;
 }
 
 .orange {
@@ -779,85 +931,56 @@ h4 {
 }
 
 /* =========================================================
-   NAVIGATION ENTRE À PROPOS ET FULLSTACK
+   NAVIGATION À PROPOS / FULLSTACK
+   Boutons sous le contenu et centrés
 ========================================================= */
 
-.navigationDiv {
+.apropos-navigation {
     position: relative;
+
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    width: min(900px, 90%);
-    min-height: 60px;
-    margin: 0 auto 30px;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 1250px;
+    margin: 35px auto;
+    padding: 0 15px;
+
+    box-sizing: border-box;
 }
 
-.navigationDiv .navigationProjet {
+.apropos-contenu {
     position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Bouton placé sous le contenu */
+
+.apropos-navigation .navigationProjet {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
+
+    width: 52px;
+    height: 52px;
+    margin: 20px auto 0;
     padding: 0;
-    color: rgb(190, 32, 32);
-    font-size: 2rem;
-    line-height: 1;
-    background-color: transparent;
-    border: 1px solid #800000;
-    border-radius: 50%;
-    cursor: pointer;
-    transition:
-        color 0.2s ease,
-        background-color 0.2s ease,
-        transform 0.2s ease;
+
+    transform: none;
 }
 
-.navigationDiv .previous {
-    margin-right: auto;
-}
+/* Effet au survol */
 
-.navigationDiv .next {
-    margin-left: auto;
-}
-
-.navigationDiv .navigationProjet:hover {
-    color: white;
-    background-color: rgba(206, 106, 6, 0.5);
-    transform: scale(1.05);
-}
-
-.navigationDiv .navigationProjet::after {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 5px 9px;
-    color: #ddd;
-    font-size: 0.75rem;
-    font-weight: normal;
-    white-space: nowrap;
-    background-color: rgba(33, 21, 21, 0.95);
-    border: 1px solid rgba(206, 106, 6, 0.4);
-    border-radius: 4px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-}
-
-.navigationDiv .previous::after {
-    content: "Précédent";
-}
-
-.navigationDiv .next::after {
-    content: "Suivant";
-}
-
-.navigationDiv .navigationProjet:hover::after,
-.navigationDiv .navigationProjet:focus-visible::after {
-    opacity: 1;
-    visibility: visible;
+.apropos-navigation .navigationProjet:hover {
+    transform: scale(1.12);
 }
 
 /* =========================================================
@@ -1013,7 +1136,7 @@ form button:disabled {
 }
 
 /* =========================================================
-   ANIMATIONS
+   ANIMATIONS GÉNÉRALES
 ========================================================= */
 
 .tremble {
@@ -1046,7 +1169,11 @@ form button:disabled {
     }
 
     .identite {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
         gap: 10px;
+        max-width: calc(100% - 90px);
     }
 
     .nom {
@@ -1055,9 +1182,12 @@ form button:disabled {
 
     .specialite {
         font-size: 0.75rem;
+        letter-spacing: 2px;
     }
 
     .menu-button {
+        position: relative;
+        z-index: 102;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1081,12 +1211,25 @@ form button:disabled {
         border-radius: 2px;
     }
 
+    /* Menu déroulant mobile */
+
     .navbar {
+        position: fixed;
         top: 65px;
+        right: auto;
+        left: 0;
+        z-index: 99;
         flex-direction: column;
         align-items: stretch;
+        flex-wrap: nowrap;
         gap: 0;
+        width: 100%;
+        height: auto;
         padding: 8px 20px;
+        background-color: rgba(33, 21, 21, 0.97);
+        border-bottom: 1px solid rgba(206, 106, 6, 0.35);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        animation: apparitionMenu 0.5s ease-out 0.1s both;
     }
 
     .navbar li {
@@ -1103,7 +1246,7 @@ form button:disabled {
     .navbar .menuLien {
         display: block;
         width: 100%;
-        padding: 12px 20px 12px 0;
+        padding: 12px 20px;
         font-size: 0.9rem;
     }
 
@@ -1113,7 +1256,6 @@ form button:disabled {
 
     .about,
     .fullstack,
-    .skills,
     .projet,
     .interet,
     .contact,
@@ -1132,29 +1274,36 @@ form button:disabled {
         flex-basis: 100%;
     }
 
-    .tech-skill-column {
-        flex-basis: 100%;
-        min-width: 0;
+    /* Compétences mobile */
+
+    .skills {
+        width: 94%;
+        margin: 20px auto;
+        padding: 10px;
     }
 
-    .articleSkills,
+    .articleSkills {
+        padding: 12px;
+    }
+
+    .tech-skills-container {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .tech-skill-column {
+        min-width: 0;
+        padding: 3px 5px;
+    }
+
+    .tech-skill-column h3 {
+        margin: 5px 0 7px;
+        font-size: 0.85rem;
+    }
+
     .articleInteret,
     .articleContact {
         padding: 15px;
-    }
-
-    .navigationDiv {
-        width: 90%;
-        min-height: 55px;
-    }
-
-    .navigationDiv .navigationProjet {
-        width: 42px;
-        height: 42px;
-    }
-
-    .navigationDiv .navigationProjet::after {
-        font-size: 0.7rem;
     }
 
     .data-projet {
@@ -1203,17 +1352,49 @@ form button:disabled {
         background: transparent;
     }
 
+    /* Navigation des projets */
+
     .navigationProjetDiv {
         top: 33.333%;
         padding: 0 8px;
     }
 
-    .navigationProjet {
-        width: 38px;
-        height: 38px;
-        font-size: 1.6rem;
+    .navigationProjetDiv .navigationProjet {
+        width: 42px;
+        height: 42px;
+        font-size: 1.3rem;
+    }
+
+    /* Navigation À propos / Fullstack */
+
+    .apropos-navigation {
+        width: 94%;
+        margin: 25px auto;
+        padding: 0;
+    }
+
+    .apropos-navigation .navigationProjet {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+
+        width: 46px;
+        height: 46px;
+        margin: 16px auto 0;
+
+        font-size: 1.3rem;
+        transform: none;
+    }
+
+    .apropos-navigation .navigationProjet:hover {
+        transform: scale(1.12);
     }
 }
+
+/* =========================================================
+   PETITS MOBILES
+========================================================= */
 
 @media screen and (max-width: 420px) {
 
@@ -1227,26 +1408,49 @@ form button:disabled {
 
     .specialite {
         font-size: 0.65rem;
+        letter-spacing: 1px;
     }
 
     .about,
     .fullstack,
-    .skills,
     .projet,
     .interet,
     .contact {
         padding: 12px;
     }
 
-    .navigationDiv {
-        width: 95%;
-        min-height: 50px;
+    .skills {
+        padding: 8px;
     }
 
-    .navigationDiv .navigationProjet {
-        width: 38px;
-        height: 38px;
-        font-size: 1.6rem;
+    .articleSkills {
+        padding: 10px;
+    }
+
+    /* Navigation À propos / Fullstack */
+
+    .apropos-navigation {
+        width: 94%;
+        margin: 20px auto;
+        padding: 0;
+    }
+
+    .apropos-navigation .navigationProjet {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+
+        width: 42px;
+        height: 42px;
+        margin: 14px auto 0;
+
+        font-size: 1.2rem;
+        transform: none;
+    }
+
+    .apropos-navigation .navigationProjet:hover {
+        transform: scale(1.12);
     }
 
     .orange {
@@ -1290,15 +1494,17 @@ form button:disabled {
         letter-spacing: 2px;
     }
 
+    /* Boutons de navigation des projets */
+
     .navigationProjetDiv {
         top: 33.333%;
         padding: 0 5px;
     }
 
-    .navigationProjet {
-        width: 32px;
-        height: 32px;
-        font-size: 1.4rem;
+    .navigationProjetDiv .navigationProjet {
+        width: 34px;
+        height: 34px;
+        font-size: 1.1rem;
     }
 }
 
@@ -1318,7 +1524,16 @@ form button:disabled {
     }
 
     .presentation .nom,
-    .specialite {
+    .specialite,
+    .navbar {
+        opacity: 1;
+        transform: none;
+        letter-spacing: 0;
+    }
+
+    .mel,
+    .cy,
+    .dev {
         opacity: 1;
         transform: none;
     }

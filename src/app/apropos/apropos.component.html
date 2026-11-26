@@ -1,22 +1,33 @@
-<app-about [@fadeInOut]="showDiv ? 'in' : 'out'" *ngIf="showDiv"></app-about>
-<app-fullstack [@fadeInOut]="showDiv ? 'out' : 'in'" *ngIf="!showDiv"></app-fullstack>
+<div class="apropos-navigation">
 
-<div class="navigationDiv">
+    <div class="apropos-contenu">
+
+        <app-about
+            [@fadeInOut]="showDiv ? 'in' : 'out'"
+            *ngIf="showDiv">
+        </app-about>
+
+        <app-fullstack
+            [@fadeInOut]="showDiv ? 'out' : 'in'"
+            *ngIf="!showDiv">
+        </app-fullstack>
+
+    </div>
+
     <button
         class="navigationProjet previous"
         *ngIf="showDiv"
         (click)="onToggle(1)"
-        aria-label="Précédent"
-        title="Précédent">
-        &lt;
+        aria-label="Précédent">
+        <span>&#10094;</span>
     </button>
 
     <button
         class="navigationProjet next"
         *ngIf="!showDiv"
         (click)="onToggle(2)"
-        aria-label="Suivant"
-        title="Suivant">
-        &gt;
+        aria-label="Suivant">
+        <span>&#10095;</span>
     </button>
+
 </div>
