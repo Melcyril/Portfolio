@@ -4,21 +4,21 @@
 
         <h2>Me contacter : </h2>
         <!-- contact.component.html -->
-<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+        <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
 
-    <input type="text" id="nom" name="nom" [(ngModel)]='nom' minlength="1" maxlength="50" placeholder="Nom" required>
+            <input type="text" id="nom" name="nom" [(ngModel)]='nom' minlength="1" maxlength="50" placeholder="Nom" required>
 
-    <input type="text" id="prenom" name="prenom" [(ngModel)]="prenom" minlength="1" maxlength="50"  placeholder="Prénom" required>
-  
+            <input type="text" id="prenom" name="prenom" [(ngModel)]="prenom" minlength="1" maxlength="50"  placeholder="Prénom" required>
+          
 
-    <input type="email" id="email" name="email" [(ngModel)]="email"  minlength="6" maxlength="254" placeholder="Email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
-    
+            <input type="email" id="email" name="email" [(ngModel)]="email"  minlength="6" maxlength="254" placeholder="Email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+            
 
-    <textarea id="message" name="message" [(ngModel)]="message" rows="10" cols="50" minlength="2" maxlength="4000"  placeholder="Message" required></textarea>
-  
-    <button type="submit" [disabled]="contactForm.invalid">Valider</button>
+            <textarea id="message" name="message" [(ngModel)]="message" rows="10" cols="50" minlength="2" maxlength="4000"  placeholder="Message" required></textarea>
+          
+            <button type="submit" [disabled]="contactForm.invalid">Valider</button>
 
-  </form>
+        </form>
  
 
   <p *ngIf="messageSent">Message envoyé</p>

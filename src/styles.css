@@ -637,6 +637,7 @@ h4 {
     color: #e0e0e0;
 }
 
+
 /* =========================================================
    COMPÉTENCES
 ========================================================= */
@@ -648,48 +649,82 @@ h4 {
 }
 
 .articleSkills {
+    width: 100%;
     padding: 14px;
+    border-bottom: 2px solid #800000;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.45);
 }
 
 .articleSkills h2 {
-    margin-bottom: 12px;
-    padding: 7px;
+    margin-bottom: 20px;
+    padding: 8px;
     font-size: 1.1rem;
 }
 
+/* Grille des compétences */
 .tech-skills-container {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px 20px;
+    gap: 20px 28px;
     width: 100%;
 }
 
 .tech-skill-column {
     min-width: 0;
-    padding: 4px 7px;
+    padding: 5px 8px 10px;
+    border-bottom: 1px solid rgba(206, 106, 6, 0.25);
 }
 
-.tech-skill-column h3 {
-    margin: 5px 0 7px;
-    padding: 5px;
-    font-size: 0.85rem;
+/* Nom de la technologie et niveau */
+.skill-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.skill-header h3 {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    color: whitesmoke;
+    font-size: 0.9rem;
+    font-weight: 600;
     text-shadow: none;
+    text-align: left;
 }
 
-.progress-bar-container {
+.skill-level {
+    flex-shrink: 0;
+    color: rgb(255, 160, 65);
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* Notation visuelle sur 5 */
+.skill-rating {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
     width: 100%;
-    height: 7px;
-    margin: 5px 0;
-    overflow: hidden;
-    background-color: rgba(224, 224, 224, 0.2);
-    border-radius: 10px;
 }
 
-.progress-bar {
-    height: 100%;
+.rating-segment {
+    height: 7px;
+    background-color: rgba(206, 106, 6, 0.18);
+    border: 1px solid rgba(206, 106, 6, 0.35);
+    border-radius: 5px;
+    transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.rating-segment.active {
     background-color: rgb(206, 106, 6);
-    border-radius: 10px;
-    transition: width 0.5s ease-in-out;
+    border-color: rgb(255, 160, 65);
+    box-shadow: 0 0 5px rgba(206, 106, 6, 0.35);
 }
 
 /* =========================================================
@@ -757,14 +792,16 @@ h4 {
     top: 5.3%;
     right: 22%;
     z-index: 2;
-    width: 56.2%;
-    height: 57.8%;
+    width: 56.4%;
+    height: 59%;
     padding: 0;
     object-fit: cover;
     opacity: 0.85;
     filter: brightness(0.45);
     box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.5);
+    border: 5px solid black;
     transition: transform 0.1s ease, opacity 0.1s ease, filter 0.1s ease;
+    
 }
 
 .image-container:hover p img {
@@ -1389,6 +1426,7 @@ form button:disabled {
         padding: 16px;
     }
 
+
     /* Compétences mobile */
 
     .skills {
@@ -1403,73 +1441,26 @@ form button:disabled {
 
     .tech-skills-container {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 12px;
     }
 
     .tech-skill-column {
         min-width: 0;
-        padding: 3px 5px;
+        padding: 5px 6px 9px;
     }
 
-    .tech-skill-column h3 {
-        margin: 5px 0 7px;
-        font-size: 0.8rem;
+    .skill-header h3 {
+        font-size: 0.85rem;
     }
 
-    .articleInteret,
-    .articleContact {
-        padding: 12px;
+    .skill-level {
+        font-size: 0.75rem;
     }
 
-    .data-projet {
-        width: 95%;
+    .skill-rating {
+        gap: 5px;
     }
 
-    .mentionP {
-        padding: 0;
-    }
-
-    h2 {
-        font-size: 1.1rem;
-    }
-
-    h3 {
-        font-size: 0.9rem;
-    }
-
-    .image-container {
-        width: 100%;
-    }
-
-    .details-projet {
-        padding: 12px 5px;
-        scroll-margin-top: 90px;
-    }
-
-    .image-container .overlay {
-        top: 33.333%;
-        height: auto;
-        padding: 8px;
-        transform: translateY(-50%);
-        background-color: transparent;
-    }
-
-    .image-container .overlay h4 {
-        width: min(57%, 100%);
-        max-width: 100%;
-        margin: 0 21% 0 auto;
-        padding: 7px;
-        font-size: clamp(0.8rem, 3vw, 0.95rem);
-    }
-
-    .image-container .overlay .menuLien {
-        max-width: 100%;
-        margin: 0;
-        padding: 7px 10px;
-        font-size: 0.8rem;
-        line-height: 1.3;
-        background: transparent;
-    }
 
     /* Navigation des projets */
 
@@ -1536,13 +1527,36 @@ form button:disabled {
         padding: 10px;
     }
 
+
     .skills {
-        padding: 7px;
+        width: 95%;
+        padding: 8px;
     }
 
     .articleSkills {
-        padding: 9px;
+        padding: 8px;
     }
+
+    .articleSkills h2 {
+        font-size: 1rem;
+    }
+
+    .skill-header h3 {
+        font-size: 0.85rem;
+    }
+
+    .skill-level {
+        font-size: 0.7rem;
+    }
+
+    .skill-rating {
+        gap: 4px;
+    }
+
+    .rating-segment {
+        height: 6px;
+    }
+
 
     /* Navigation À propos / Fullstack */
 

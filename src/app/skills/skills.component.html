@@ -1,16 +1,31 @@
-<hr class="hr-line"  id="skills">
-<section  class="skills section-content">
-        <article class="articleSkills">
-            <h2>Mes compétences : </h2>
-                    <!-- technologie.component.html -->
-                    <div class="tech-skills-container">
-                    <div *ngFor="let skill of techSkills" class="tech-skill-column">
-                        <h3>{{ skill.tech }}</h3>
-                        <div class="progress-bar-container">
-                          <div class="progress-bar" [style.width]="skill.level + '%'"></div>
-                        </div>
-                      </div>
-                      </div>
-        </article>
 
+<hr class="hr-line" id="skills">
+
+<section class="skills section-content">
+  <article class="articleSkills">
+
+    <h2>Mes compétences</h2>
+
+    <div class="tech-skills-container">
+
+      <div *ngFor="let skill of techSkills" class="tech-skill-column">
+
+        <div class="skill-header">
+          <h3>{{ skill.tech }}</h3>
+          <span class="skill-level">{{ skill.level }}/5</span>
+        </div>
+
+        <div class="skill-rating">
+          <div
+            *ngFor="let i of [1, 2, 3, 4, 5]"
+            class="rating-segment"
+            [class.active]="i <= skill.level">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </article>
 </section>
