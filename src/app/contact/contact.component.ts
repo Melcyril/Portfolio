@@ -1,67 +1,96 @@
+
 import { Component, OnInit } from '@angular/core';
-import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
-import { environment } from "../../environments/environnement"
+import emailjs from '@emailjs/browser';
+import { environment } from "../../environments/environnement";
 import { NgForm } from '@angular/forms';
 import { GlobalService } from '../global.service';
-
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styles: [
-  ]
+  styles: []
 })
-export class ContactComponent implements OnInit{
-  constructor(private globalService: GlobalService) {}
-  messageSent = false;
-  nom: string =""
-  prenom: string =""
-  email: string =""
-  message: string =""
-  myMention:boolean=false
-  monEntreprise:string=environment.entreprise_
-  monAdresse:string=environment.adress_
-  monMail:string=environment.mymail_
-  monNomPrenom:string=environment.name_+" "+environment.surname_
-  myHost:string=environment.myHost_
-  myAdresseHost:string=environment.adressHost_
-  myLinkHost:string=environment.linkHost_
+export class ContactComponent implements OnInit {
 
-  onSubmit(contactForm: NgForm) {
-    if(contactForm.valid){
-    // Traitez les données ici (par exemple, envoyez-les par e-mail)
-    console.log('Données soumises :', this.nom, this.prenom, this.email, this.message);
-    
-    // Appelez votre service d'envoi d'e-mail ici
-    //this.mailService.sendEmail(this.nom, this.prenom, this.email, this.message);
-    emailjs.init(environment.apiKey_);
-    emailjs.send(environment.idService_,environment.idTemplate_,{
+  constructor(private globalService: GlobalService) {}
+
+  messageSent = false;
+
+  nom: string = "";
+  prenom: string = "";
+  email: string = "";
+  message: string = "";
+
+  myMention: boolean = false;
+
+  monEntreprise: string = environment.entreprise_;
+  monAdresse: string = environment.adress_;
+  monMail: string = environment.mymail_;
+  monNomPrenom: string = environment.name_ + " " + environment.surname_;
+  myHost: string = environment.myHost_;
+  myAdresseHost: string = environment.adressHost_;
+  myLinkHost: string = environment.linkHost_;
+
+  async onSubmit(contactForm: NgForm) {
+
+    if (!contactForm.valid) {
+      console.log('Le formulaire est invalide.');
+      return;
+    }
+
+    const templateParams = {
       email: this.email,
       nom: this.nom,
       prenom: this.prenom,
-      message: this.message,
-      }).then((result: EmailJSResponseStatus) => {
-        console.log(result.text);
-        contactForm.reset();
-        this.messageSent=true
-        setTimeout(() => { this.messageSent = false; }, 5000);
-    }, (error) => {
-        console.log(error.text);
-    });
-  }else{
-    console.log('Le formulaire est invalide.');
+      message: this.message
+    };
+
+    console.log('Données soumises :', templateParams);
+
+    try {
+
+      const result = await emailjs.send(
+        environment.idService_,
+        environment.idTemplate_,
+        templateParams,
+        {
+          publicKey: environment.apiKey_
+        }
+      );
+
+      console.log('Email envoyé avec succès !');
+      console.log('Statut :', result.status);
+      console.log('Réponse :', result.text);
+
+      contactForm.resetForm();
+
+      this.messageSent = true;
+
+      setTimeout(() => {
+        this.messageSent = false;
+      }, 5000);
+
+    } catch (error: any) {
+
+      console.error('Erreur lors de l\'envoi du mail :', error);
+      console.error('Code HTTP :', error.status);
+      console.error('Message :', error.text);
+
+    }
   }
-  }
+
   ngOnInit(): void {
-   
-    console.log(this.mention)
+    console.log(this.mention);
   }
-  mention(){
-    this.globalService.myLegaleMention=true; 
-    this.myMention=this.globalService.myLegaleMention
+
+  mention() {
+    this.globalService.myLegaleMention = true;
+    this.myMention = this.globalService.myLegaleMention;
   }
-  retour(){
-    this.globalService.myLegaleMention=false; 
-    this.myMention=this.globalService.myLegaleMention
+
+  retour() {
+    this.globalService.myLegaleMention = false;
+    this.myMention = this.globalService.myLegaleMention;
   }
+
 }

@@ -18,6 +18,7 @@ body {
     background-color: rgb(33, 21, 21);
     color: whitesmoke;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
     text-shadow: none;
 }
 
@@ -79,14 +80,42 @@ body {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    gap: 22px;
+    gap: 18px;
     overflow: visible;
+    transform-origin: center center;
+    animation: identiteIntro 2.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* =========================================================
+   ANIMATION INTRO IDENTITÉ
+========================================================= */
+
+@keyframes identiteIntro {
+    0% {
+        transform: scale(1.6);
+        filter: drop-shadow(0 0 12px rgba(206, 106, 6, 0.8));
+    }
+
+    30% {
+        transform: scale(1.6);
+        filter: drop-shadow(0 0 12px rgba(206, 106, 6, 0.8));
+    }
+
+    70% {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 8px rgba(206, 106, 6, 0.5));
+    }
+
+    100% {
+        transform: scale(1);
+        filter: none;
+    }
 }
 
 .nom {
     display: inline-block;
     margin: 0;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: bold;
     letter-spacing: 1px;
     text-decoration: none;
@@ -142,7 +171,7 @@ html[native-dark-active] .nom {
     display: inline-block;
     color: whitesmoke;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 500;
     letter-spacing: 7px;
     white-space: nowrap;
@@ -154,14 +183,14 @@ html[native-dark-active] .nom {
 .nomSpan {
     color: rgb(206, 108, 16);
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     text-shadow: 1px 1px 2px rgb(255, 131, 6);
 }
 
 .prenomSpan {
     color: rgba(203, 206, 16, 0.8);
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     text-shadow: 1px 1px 2px rgb(255, 131, 6);
 }
 
@@ -209,6 +238,85 @@ html[native-dark-active] .nom {
     }
 }
 
+/* =========================================================
+   ANIMATION DES LETTRES DE DEV
+========================================================= */
+
+.dev {
+    display: inline-block;
+    white-space: nowrap;
+    perspective: 500px;
+}
+
+.dev-lettre {
+    display: inline-block;
+    transform-origin: center center;
+    backface-visibility: visible;
+}
+
+.dev-d {
+    opacity: 0;
+    animation: rotationD 0.8s ease-out 1.7s forwards;
+}
+
+@keyframes rotationD {
+    0% {
+        opacity: 0;
+        transform: rotateY(180deg);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotateY(0deg);
+    }
+}
+
+.dev-e {
+    opacity: 0;
+    animation: rotationE 0.6s ease-out 2.3s forwards;
+}
+
+@keyframes rotationE {
+    0% {
+        opacity: 0;
+        transform: rotate(90deg);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+}
+
+.dev-v {
+    opacity: 0;
+    animation: rotationV 0.8s ease-in-out 2.8s forwards;
+}
+
+@keyframes rotationV {
+    0% {
+        opacity: 0;
+        transform: rotate(0deg);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(360deg);
+    }
+}
+
 @keyframes apparitionSpecialite {
     0% {
         opacity: 0;
@@ -241,7 +349,7 @@ html[native-dark-active] .nom {
     align-items: center;
     justify-content: flex-end;
     flex-wrap: nowrap;
-    gap: 8px;
+    gap: 6px;
     width: auto;
     height: 76px;
     margin: 0;
@@ -275,9 +383,9 @@ html[native-dark-active] .nom {
 .menuLien,
 .mentionLien {
     display: inline-block;
-    padding: 12px 14px;
+    padding: 10px 11px;
     color: whitesmoke;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 1px;
     text-decoration: none;
@@ -320,25 +428,24 @@ html[native-dark-active] .nom {
 }
 
 /* =========================================================
-   AJUSTEMENT POUR LES ÉCRANS INTERMÉDIAIRES
+   ÉCRANS INTERMÉDIAIRES
 ========================================================= */
 
 @media screen and (min-width: 769px) and (max-width: 1100px) {
-
     .presentation {
         padding: 0 3%;
     }
 
     .identite {
-        gap: 12px;
+        gap: 10px;
     }
 
     .nom {
-        font-size: 1.45rem;
+        font-size: 1.35rem;
     }
 
     .specialite {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 
     .navbar {
@@ -347,8 +454,8 @@ html[native-dark-active] .nom {
     }
 
     .menuLien {
-        padding: 10px 8px;
-        font-size: 0.62rem;
+        padding: 9px 7px;
+        font-size: 0.58rem;
         letter-spacing: 0.5px;
     }
 
@@ -389,8 +496,8 @@ html[native-dark-active] .nom {
     left: auto;
     transform: none;
     width: min(1100px, 90%);
-    margin: 45px auto;
-    padding: 30px;
+    margin: 30px auto;
+    padding: 22px;
     color: rgba(245, 245, 245, 0.9);
     text-align: center;
     background-color: rgba(206, 106, 6, 0.08);
@@ -399,37 +506,64 @@ html[native-dark-active] .nom {
 
 .about {
     width: min(900px, 90%);
-    line-height: 1.8;
+    line-height: 1.7;
 }
+
+.about {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 28px 32px;
+
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: 0.15px;
+    text-align: center;
+    color: #e2e2e2;
+    text-align: left;
+}
+
 
 .about p {
-    margin: 12px 0;
-    padding: 0 3%;
-    color: #d0d0d0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1rem;
-    line-height: 1.8;
+    margin: 0 0 18px;
 }
 
-.about.policeMelCyDev p {
-    font-family: inherit;
-    letter-spacing: 0.3px;
-    line-height: 1.9;
+
+.about strong{
+    color:#ffffff;
+    font-weight:700;
 }
+
+
+.about p:first-child {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 22px;
+}
+
+
+.about p:last-child {
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #ffffff;
+}
+
 
 .fullstack {
     display: flex;
     justify-content: center;
     align-items: stretch;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 18px;
     width: min(1000px, 90%);
 }
 
 .frontback {
     flex: 1 1 280px;
     max-width: 450px;
-    padding: 25px;
+    padding: 20px;
     border: 1px solid #800000;
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.5);
@@ -441,8 +575,9 @@ html[native-dark-active] .nom {
 }
 
 .espace {
-    padding: 10px 0;
+    padding: 7px 0;
     color: #e0e0e0;
+    font-size: 0.9rem;
     font-style: italic;
     letter-spacing: 1px;
 }
@@ -452,33 +587,34 @@ html[native-dark-active] .nom {
 ========================================================= */
 
 h2 {
-    margin: 0 0 25px;
-    padding: 12px;
+    margin: 0 0 18px;
+    padding: 9px;
     color: whitesmoke;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-style: normal;
     text-shadow: 2px 2px 3px black;
-    background-color: rgba(56, 121, 54, 0.25);
+    background-color: rgba(206, 108, 16, 0.774);
     border-radius: 5px;
 }
 
 h3 {
     width: 100%;
-    margin: 20px 0;
-    padding: 10px;
-    color: #d98a8a;
-    font-size: 1.1rem;
-    border: 1px solid #800000;
+    margin: 15px 0;
+    padding: 8px;
+    color: whitesmoke;
+    font-size: 1rem;
+    
     border-radius: 4px;
-    text-shadow: 2px 2px 2px #800000;
+    text-shadow: 2px 2px 2px rgba(206, 108, 16, 0.774);
 }
 
 h4 {
     width: 60%;
-    margin: 10px auto;
-    padding: 10px;
+    margin: 8px auto;
+    padding: 8px;
     color: whitesmoke;
+    font-size: 0.95rem;
     border-radius: 4px;
     text-shadow: 2px 2px 2px #800000;
 }
@@ -487,14 +623,15 @@ h4 {
 .articleInteret,
 .articleContact {
     width: 100%;
-    padding: 25px;
+    padding: 18px;
     border-bottom: 2px solid #800000;
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.45);
 }
 
 .articleInteret p {
-    padding: 8px;
+    padding: 6px;
+    font-size: 0.9rem;
     font-weight: bold;
     letter-spacing: 1px;
     color: #e0e0e0;
@@ -506,36 +643,36 @@ h4 {
 
 .skills {
     width: min(750px, 90%);
-    margin: 25px auto;
-    padding: 15px;
+    margin: 20px auto;
+    padding: 12px;
 }
 
 .articleSkills {
-    padding: 18px;
+    padding: 14px;
 }
 
 .articleSkills h2 {
-    margin-bottom: 15px;
-    padding: 8px;
-    font-size: 1.2rem;
+    margin-bottom: 12px;
+    padding: 7px;
+    font-size: 1.1rem;
 }
 
 .tech-skills-container {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 25px;
+    gap: 10px 20px;
     width: 100%;
 }
 
 .tech-skill-column {
     min-width: 0;
-    padding: 5px 8px;
+    padding: 4px 7px;
 }
 
 .tech-skill-column h3 {
-    margin: 5px 0 8px;
+    margin: 5px 0 7px;
     padding: 5px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-shadow: none;
 }
 
@@ -584,9 +721,9 @@ h4 {
 
 .projet h5 {
     position: relative;
-    margin: 20px auto;
+    margin: 15px auto;
     color: rgb(206, 108, 16);
-    font-size: 1.2rem;
+    font-size: 1.05rem;
 }
 
 /* =========================================================
@@ -596,7 +733,7 @@ h4 {
 .image-container {
     position: relative;
     width: min(650px, 100%);
-    margin: 20px auto;
+    margin: 15px auto;
     overflow: hidden;
 }
 
@@ -647,10 +784,10 @@ h4 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     width: 100%;
     height: auto;
-    padding: 10px;
+    padding: 8px;
     background-color: transparent;
     opacity: 1;
     transform: translateY(-50%);
@@ -668,8 +805,8 @@ h4 {
 .image-container .overlay h4 {
     width: min(57%, 100%);
     margin: 0 21% 0 auto;
-    padding: 10px;
-    font-size: larger;
+    padding: 8px;
+    font-size: 1rem;
     color: rgb(255, 237, 228);
     text-align: center;
     background: transparent;
@@ -683,9 +820,9 @@ h4 {
     display: inline-block;
     max-width: 100%;
     margin: 0;
-    padding: 10px 14px;
+    padding: 8px 12px;
     color: rgb(255, 160, 65);
-    font-size: clamp(12px, 2.5vw, 16px);
+    font-size: clamp(11px, 2.2vw, 14px);
     font-weight: 600;
     text-align: center;
     text-decoration: none;
@@ -712,7 +849,7 @@ h4 {
     left: 50%;
     transform: translate(-50%, -50%);
     color: whitesmoke;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
 }
 
@@ -725,33 +862,26 @@ h4 {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    width: 52px;
-    height: 52px;
+    width: 46px;
+    height: 46px;
     padding: 0;
     margin: 0;
-
     color: rgb(255, 160, 65);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     line-height: 1;
-
     background: linear-gradient(
         145deg,
         rgba(156, 65, 15, 0.25),
         rgba(33, 21, 21, 0.95)
     );
-
     border: 1px solid rgba(206, 106, 6, 0.8);
     border-radius: 50%;
-
     box-shadow:
         0 3px 10px rgba(0, 0, 0, 0.35),
         inset 0 0 8px rgba(206, 106, 6, 0.08);
-
     cursor: pointer;
     pointer-events: auto;
-
     transition:
         transform 0.3s ease,
         color 0.3s ease,
@@ -764,11 +894,9 @@ h4 {
     color: white;
     background-color: rgb(156, 65, 15);
     border-color: rgb(255, 160, 65);
-
     box-shadow:
         0 0 8px rgba(206, 106, 6, 0.5),
         0 0 20px rgba(206, 106, 6, 0.25);
-
     transform: scale(1.12);
 }
 
@@ -800,7 +928,6 @@ h4 {
 
 /* =========================================================
    NAVIGATION DES PROJETS
-   Boutons sur les côtés de l'image
 ========================================================= */
 
 .navigationProjetDiv {
@@ -808,15 +935,12 @@ h4 {
     top: 33.333%;
     left: 0;
     z-index: 10;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     width: 100%;
     margin: 0;
     padding: 0 12px;
-
     transform: translateY(-50%);
     pointer-events: none;
 }
@@ -829,9 +953,9 @@ h4 {
 .etiquetteSuivant,
 .etiquettePrecedent {
     position: absolute;
-    top: 60px;
+    top: 55px;
     color: #ddd;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
 .etiquettePrecedent {
@@ -850,29 +974,30 @@ h4 {
     position: relative;
     z-index: 5;
     width: 100%;
-    margin: 25px auto;
-    padding: 20px 0;
+    margin: 18px auto;
+    padding: 15px 0;
     scroll-margin-top: 110px;
 }
 
 .data-projet {
     position: relative;
     width: min(700px, 90%);
-    margin: 15px auto;
+    margin: 12px auto;
     padding: 5px;
-    line-height: 1.7;
+    line-height: 1.6;
     color: #e0e0e0;
     text-shadow: none;
     overflow-wrap: anywhere;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9rem;
 }
 
 .data-projet.policeMelCyDev {
     font-family: inherit;
-    font-size: 0.98rem;
+    font-size: 0.9rem;
     font-weight: 400;
     letter-spacing: 0.3px;
-    line-height: 1.9;
+    line-height: 1.8;
     text-align: justify;
 }
 
@@ -880,19 +1005,16 @@ h4 {
     display: block;
     width: fit-content;
     max-width: 90%;
-    margin: 12px auto;
-    padding: 7px 12px;
+    margin: 10px auto;
+    padding: 6px 10px;
     color: rgb(244, 255, 246);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: bold;
     text-transform: uppercase;
-    background-color: #9b0000;
+    background-color: rgba(206, 108, 16, 0.774);;
     border-radius: 7px;
 }
 
-.vert {
-    background-color: rgba(56, 121, 54, 0.7);
-}
 
 .details-projet a:not(.close) {
     color: rgb(255, 160, 65);
@@ -910,10 +1032,11 @@ h4 {
 .close {
     position: relative;
     display: inline-block;
-    margin: 15px;
-    padding: 5px 15px;
+    margin: 12px;
+    padding: 5px 12px;
     color: rgb(206, 106, 6);
-    letter-spacing: 3px;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
     text-decoration: none;
     cursor: pointer;
     border: 1px solid transparent;
@@ -932,22 +1055,18 @@ h4 {
 
 /* =========================================================
    NAVIGATION À PROPOS / FULLSTACK
-   Boutons sous le contenu et centrés
 ========================================================= */
 
 .apropos-navigation {
     position: relative;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     width: 100%;
     max-width: 1250px;
-    margin: 35px auto;
+    margin: 25px auto;
     padding: 0 15px;
-
     box-sizing: border-box;
 }
 
@@ -957,27 +1076,20 @@ h4 {
     min-width: 0;
 }
 
-/* Bouton placé sous le contenu */
-
 .apropos-navigation .navigationProjet {
     position: relative;
     top: auto;
     left: auto;
     right: auto;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    width: 52px;
-    height: 52px;
-    margin: 20px auto 0;
+    width: 46px;
+    height: 46px;
+    margin: 15px auto 0;
     padding: 0;
-
     transform: none;
 }
-
-/* Effet au survol */
 
 .apropos-navigation .navigationProjet:hover {
     transform: scale(1.12);
@@ -995,30 +1107,30 @@ h4 {
 
 .articleContact {
     margin: 0;
-    padding: 25px;
+    padding: 18px;
     border-radius: 8px;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     width: min(600px, 100%);
     margin: 0 auto;
-    padding: 10px;
+    padding: 8px;
 }
 
 input,
 textarea {
     width: 100%;
     margin: 0;
-    padding: 12px;
+    padding: 10px;
     color: whitesmoke;
     background-color: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(206, 106, 6, 0.5);
     border-radius: 5px;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 input::placeholder,
@@ -1034,12 +1146,12 @@ textarea:focus {
 }
 
 textarea {
-    min-height: 150px;
+    min-height: 120px;
     resize: vertical;
 }
 
 form button {
-    padding: 12px 20px;
+    padding: 10px 16px;
     color: white;
     font-weight: bold;
     background-color: rgb(156, 65, 15);
@@ -1060,13 +1172,14 @@ form button:disabled {
 
 .mentionP {
     width: 100%;
-    margin: 10px auto;
+    margin: 8px auto;
     padding: 0 5%;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 .mentionLien {
-    margin: 10px;
+    margin: 8px;
 }
 
 .orange.vert {
@@ -1074,7 +1187,8 @@ form button:disabled {
 }
 
 .articleContact > p {
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 /* =========================================================
@@ -1084,9 +1198,9 @@ form button:disabled {
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
-    margin: 15px auto;
+    width: 54px;
+    height: 30px;
+    margin: 12px auto;
 }
 
 .switch input {
@@ -1105,10 +1219,10 @@ form button:disabled {
 
 .slider:before {
     position: absolute;
-    bottom: 4px;
-    left: 4px;
-    width: 26px;
-    height: 26px;
+    bottom: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
     content: "";
     background-color: rgb(206, 106, 6);
     transition: 0.4s;
@@ -1119,7 +1233,7 @@ form button:disabled {
 }
 
 .switch input:checked + .slider:before {
-    transform: translateX(28px);
+    transform: translateX(24px);
 }
 
 .switch input:focus-visible + .slider {
@@ -1171,17 +1285,17 @@ form button:disabled {
     .identite {
         position: absolute;
         left: 50%;
-        transform: translateX(-50%);
-        gap: 10px;
+        translate: -50% 0;
+        gap: 8px;
         max-width: calc(100% - 90px);
     }
 
     .nom {
-        font-size: 1.4rem;
+        font-size: 1.25rem;
     }
 
     .specialite {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         letter-spacing: 2px;
     }
 
@@ -1225,7 +1339,7 @@ form button:disabled {
         gap: 0;
         width: 100%;
         height: auto;
-        padding: 8px 20px;
+        padding: 6px 20px;
         background-color: rgba(33, 21, 21, 0.97);
         border-bottom: 1px solid rgba(206, 106, 6, 0.35);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -1246,8 +1360,8 @@ form button:disabled {
     .navbar .menuLien {
         display: block;
         width: 100%;
-        padding: 12px 20px;
-        font-size: 0.9rem;
+        padding: 10px 16px;
+        font-size: 0.8rem;
     }
 
     .backgroundcolor {
@@ -1261,29 +1375,30 @@ form button:disabled {
     .contact,
     .gestion {
         width: 94%;
-        margin: 25px auto;
-        padding: 18px;
+        margin: 20px auto;
+        padding: 15px;
     }
 
     .about p {
         padding: 0;
-        font-size: 0.95rem;
+        font-size: 0.85rem;
     }
 
     .frontback {
         flex-basis: 100%;
+        padding: 16px;
     }
 
     /* Compétences mobile */
 
     .skills {
         width: 94%;
-        margin: 20px auto;
-        padding: 10px;
+        margin: 18px auto;
+        padding: 9px;
     }
 
     .articleSkills {
-        padding: 12px;
+        padding: 10px;
     }
 
     .tech-skills-container {
@@ -1298,12 +1413,12 @@ form button:disabled {
 
     .tech-skill-column h3 {
         margin: 5px 0 7px;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     .articleInteret,
     .articleContact {
-        padding: 15px;
+        padding: 12px;
     }
 
     .data-projet {
@@ -1315,7 +1430,11 @@ form button:disabled {
     }
 
     h2 {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
+    }
+
+    h3 {
+        font-size: 0.9rem;
     }
 
     .image-container {
@@ -1323,14 +1442,14 @@ form button:disabled {
     }
 
     .details-projet {
-        padding: 15px 5px;
+        padding: 12px 5px;
         scroll-margin-top: 90px;
     }
 
     .image-container .overlay {
         top: 33.333%;
         height: auto;
-        padding: 10px;
+        padding: 8px;
         transform: translateY(-50%);
         background-color: transparent;
     }
@@ -1339,15 +1458,15 @@ form button:disabled {
         width: min(57%, 100%);
         max-width: 100%;
         margin: 0 21% 0 auto;
-        padding: 8px;
-        font-size: clamp(0.85rem, 3vw, 1rem);
+        padding: 7px;
+        font-size: clamp(0.8rem, 3vw, 0.95rem);
     }
 
     .image-container .overlay .menuLien {
         max-width: 100%;
         margin: 0;
-        padding: 8px 12px;
-        font-size: 0.85rem;
+        padding: 7px 10px;
+        font-size: 0.8rem;
         line-height: 1.3;
         background: transparent;
     }
@@ -1360,16 +1479,16 @@ form button:disabled {
     }
 
     .navigationProjetDiv .navigationProjet {
-        width: 42px;
-        height: 42px;
-        font-size: 1.3rem;
+        width: 38px;
+        height: 38px;
+        font-size: 1.2rem;
     }
 
     /* Navigation À propos / Fullstack */
 
     .apropos-navigation {
         width: 94%;
-        margin: 25px auto;
+        margin: 20px auto;
         padding: 0;
     }
 
@@ -1378,12 +1497,10 @@ form button:disabled {
         top: auto;
         left: auto;
         right: auto;
-
-        width: 46px;
-        height: 46px;
-        margin: 16px auto 0;
-
-        font-size: 1.3rem;
+        width: 42px;
+        height: 42px;
+        margin: 14px auto 0;
+        font-size: 1.2rem;
         transform: none;
     }
 
@@ -1399,15 +1516,15 @@ form button:disabled {
 @media screen and (max-width: 420px) {
 
     .identite {
-        gap: 7px;
+        gap: 6px;
     }
 
     .nom {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .specialite {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
         letter-spacing: 1px;
     }
 
@@ -1416,22 +1533,22 @@ form button:disabled {
     .projet,
     .interet,
     .contact {
-        padding: 12px;
+        padding: 10px;
     }
 
     .skills {
-        padding: 8px;
+        padding: 7px;
     }
 
     .articleSkills {
-        padding: 10px;
+        padding: 9px;
     }
 
     /* Navigation À propos / Fullstack */
 
     .apropos-navigation {
         width: 94%;
-        margin: 20px auto;
+        margin: 18px auto;
         padding: 0;
     }
 
@@ -1440,12 +1557,10 @@ form button:disabled {
         top: auto;
         left: auto;
         right: auto;
-
-        width: 42px;
-        height: 42px;
-        margin: 14px auto 0;
-
-        font-size: 1.2rem;
+        width: 38px;
+        height: 38px;
+        margin: 12px auto 0;
+        font-size: 1.1rem;
         transform: none;
     }
 
@@ -1454,7 +1569,7 @@ form button:disabled {
     }
 
     .orange {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
     }
 
     form {
@@ -1472,25 +1587,25 @@ form button:disabled {
         width: min(57%, 100%);
         margin: 0 21% 0 auto;
         padding: 5px;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 
     .image-container .overlay .menuLien {
-        padding: 6px 9px;
-        font-size: 0.75rem;
+        padding: 6px 8px;
+        font-size: 0.7rem;
         background: transparent;
     }
 
     .details-projet h3 {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     .data-projet {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     .close {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         letter-spacing: 2px;
     }
 
@@ -1502,9 +1617,9 @@ form button:disabled {
     }
 
     .navigationProjetDiv .navigationProjet {
-        width: 34px;
-        height: 34px;
-        font-size: 1.1rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
     }
 }
 
@@ -1521,6 +1636,13 @@ form button:disabled {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+
+    .presentation .identite {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        translate: none;
     }
 
     .presentation .nom,

@@ -1,41 +1,48 @@
+
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   template: `
     <div class="container">
-      <app-menu></app-menu>
+
+      <app-menu
+        (activeLinkChange)="onActiveLinkChange($event)">
+      </app-menu>
 
       <div class="backgroundcolor">
 
-        <!-- Animation du titre désactivée
-        <div class="animation">
-          <h1 class="titreFull">DEVELOPPEUR FULLSTACK</h1>
-        </div>
-        -->
+        <app-apropos
+          [class.section-active]="activeSection === 'about'">
+        </app-apropos>
 
-        <!-- Animation des caractères désactivée
-        <app-animation-caractere></app-animation-caractere>
-        -->
+        <app-skills
+          [class.section-active]="activeSection === 'skills'">
+        </app-skills>
 
-        <app-apropos></app-apropos>
-        <app-skills></app-skills>
-        <app-projet></app-projet>
-        <app-interet></app-interet>
+        <app-projet
+          [class.section-active]="activeSection === 'projet'">
+        </app-projet>
 
-        <!-- Deuxième animation des caractères désactivée
-        <app-animation-caractere></app-animation-caractere>
-        -->
+        <app-interet
+          [class.section-active]="activeSection === 'interet'">
+        </app-interet>
 
-        <app-contact></app-contact>
-
-        <!-- Animation Three.js désactivée
-        <app-animation-tree></app-animation-tree>
-        -->
+        <app-contact
+          [class.section-active]="activeSection === 'contact'">
+        </app-contact>
 
       </div>
     </div>
   `,
   styles: []
 })
-export class AppComponent {}
+export class AppComponent {
+
+  activeSection: string = '';
+
+  onActiveLinkChange(link: string): void {
+    this.activeSection = link;
+  }
+
+}
